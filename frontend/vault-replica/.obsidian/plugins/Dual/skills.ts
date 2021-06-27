@@ -2,6 +2,14 @@ import { App, FrontMatterCache } from "obsidian";
 import { fetchGenerate, fetchSearch } from "./network";
 import { removeMd } from "./utils";
 
+export function getLastBlock(splitBlocks: string[]) {
+  for (let blockIndex = splitBlocks.length - 1; blockIndex >= 0; blockIndex--) {
+    if (splitBlocks[blockIndex].toString().trim() != "") {
+      return splitBlocks[blockIndex];
+    }
+  }
+  return "";
+}
 export class SkillManager {
   app: App;
   skillMetadata: FrontMatterCache;
@@ -125,15 +133,7 @@ export class SkillManager {
   }
 
   getLastBlock(splitBlocks: string[]) {
-    for (
-      let blockIndex = splitBlocks.length - 1;
-      blockIndex >= 0;
-      blockIndex--
-    ) {
-      if (splitBlocks[blockIndex].toString().trim() != "") {
-        return splitBlocks[blockIndex];
-      }
-    }
+    return getLastBlock(splitBlocks);
   }
 
   // Get list of all blocks with type and contents
