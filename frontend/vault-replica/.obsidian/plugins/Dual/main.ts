@@ -7,7 +7,7 @@ import {
   Workspace,
 } from "obsidian";
 import ChatView, { inputId } from "view";
-import { Utils } from "utils";
+import { removeMd, copyStringToClipboard } from "utils";
 
 interface MyPluginSettings {
   customName: string;
@@ -135,8 +135,8 @@ class SampleSettingTab extends PluginSettingTab {
               setTimeout(resolve, 3000)
             ).then(() => {
               concatenated = concatenated.slice(0, 5000000);
-              concatenated = Utils.removeMd(concatenated);
-              Utils.copyStringToClipboard(concatenated);
+              concatenated = removeMd(concatenated);
+              copyStringToClipboard(concatenated);
               new Notice("Snapshot successfully copied to clipboard!");
             });
           })
